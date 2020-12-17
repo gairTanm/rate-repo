@@ -1,19 +1,113 @@
 import React from 'react';
-import { TouchableHighlight, Text, View } from 'react-native';
+import {
+  TouchableHighlight,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+} from 'react-native';
+import { Dimensions } from 'react-native';
 
 const RepositoryItem = ({ item }) => {
   return (
-    <TouchableHighlight key={item.id}>
-      <View>
-        <Text>Full Name:{item.fullName}</Text>
-        <Text>Description:{item.description}</Text>
-        <Text>Language:{item.language}</Text>
-        <Text>Stars:{item.stargazersCount}</Text>
-        <Text>Forks:{item.forksCount}</Text>
-        <Text>Reviews:{item.reviewCount}</Text>
-        <Text>Rating:{item.ratingAverage}</Text>
+    <TouchableHighlight key={item.id} style={styles.primary}>
+      <View style={styles.touchable}>
+        <View style={styles.imageText}>
+          <Image
+            source={{ uri: `${item.ownerAvatarUrl}` }}
+            style={styles.image}
+          />
+          <View style={{ flexWrap: 'wrap', margin: 10 }}>
+            <Text style={{ fontSize: 20, margin: 2 }}>{item.fullName}</Text>
+            <Text
+              style={{
+                opacity: 0.6,
+                marginTop: 10,
+                width: Dimensions.get('screen').width - 160,
+              }}
+            >
+              {item.description}
+            </Text>
+            <View style={styles.language}>
+              <Text style={{ alignSelf: 'center', color: '#F1E9DB' }}>
+                {item.language}
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.info}>
+          <View style={styles.stats}>
+            <Text style={{ alignSelf: 'center', fontSize: 20 }}>
+              {item.stargazersCount > 1000
+                ? `${Math.round((item.stargazersCount / 1000) * 10) / 10}k`
+                : item.stargazersCount}
+            </Text>
+            <Text style={{ fontSize: 20, opacity: 0.5 }}>Stars</Text>
+          </View>
+          <View style={styles.stats}>
+            <Text style={{ alignSelf: 'center', fontSize: 20 }}>
+              {item.forksCount > 1000
+                ? `${Math.round((item.forksCount / 1000) * 10) / 10}k`
+                : item.forksCount}
+            </Text>
+            <Text style={{ fontSize: 20, opacity: 0.5 }}>Forks</Text>
+          </View>
+
+          <View style={styles.stats}>
+            <Text style={{ alignSelf: 'center', fontSize: 20 }}>
+              {item.reviewCount}
+            </Text>
+            <Text style={{ fontSize: 20, opacity: 0.5 }}>Reviews</Text>
+          </View>
+
+          <View style={styles.stats}>
+            <Text style={{ alignSelf: 'center', fontSize: 20 }}>
+              {item.ratingAverage}
+            </Text>
+            <Text style={{ fontSize: 20, opacity: 0.5 }}>Rating</Text>
+          </View>
+        </View>
       </View>
     </TouchableHighlight>
   );
 };
+
+const styles = StyleSheet.create({
+  touchable: {
+    backgroundColor: '#F1E9DB',
+    borderRadius: 15,
+    width: Dimensions.get('screen').width,
+  },
+  primary: {
+    height: 250,
+  },
+  image: {
+    margin: 15,
+    width: 100,
+    height: 100,
+    borderRadius: 10,
+  },
+  info: {
+    flexDirection: 'row',
+  },
+  language: {
+    backgroundColor: '#716A5C',
+    width: 100,
+    marginTop: 10,
+    borderRadius: 5,
+    opacity: 0.9,
+    height: 25,
+    marginLeft: 1,
+  },
+  imageText: {
+    flexDirection: 'row',
+  },
+  stats: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    padding: 20,
+    paddingLeft: 20,
+  },
+});
+
 export default RepositoryItem;

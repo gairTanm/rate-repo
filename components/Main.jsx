@@ -1,12 +1,12 @@
 import React from 'react';
 import { StatusBar, View, StyleSheet } from 'react-native';
-import { Provider as PaperProvider } from 'react-native-paper';
+import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#343a40',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -14,12 +14,11 @@ const styles = StyleSheet.create({
 
 const Main = () => {
   return (
-    <PaperProvider>
-      <View style={styles.container}>
-        <RepositoryList />
-        <StatusBar style="auto" />
-      </View>
-    </PaperProvider>
+    <View style={styles.container}>
+      <AppBar />
+      <RepositoryList />
+      <StatusBar style="auto" />
+    </View>
   );
 };
 
