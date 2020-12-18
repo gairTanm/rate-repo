@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  TouchableHighlight,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import { TouchableHighlight, View, StyleSheet, Image } from 'react-native';
 import { Dimensions } from 'react-native';
+import Text from './Text';
 
 const RepositoryItem = ({ item }) => {
   return (
@@ -18,13 +13,15 @@ const RepositoryItem = ({ item }) => {
             style={styles.image}
           />
           <View style={{ flexWrap: 'wrap', margin: 10 }}>
-            <Text style={{ fontSize: 20, margin: 2 }}>{item.fullName}</Text>
+            <Text style={{ fontSize: 20, margin: 2 }} color="textPrimary">
+              {item.fullName}
+            </Text>
             <Text
               style={{
-                opacity: 0.6,
                 marginTop: 10,
                 width: Dimensions.get('screen').width - 160,
               }}
+              color="textSecondary"
             >
               {item.description}
             </Text>
@@ -79,6 +76,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width,
     shadowColor: 'black',
     shadowOpacity: 0.6,
+    elevation: 10,
   },
   primary: {
     height: 250,

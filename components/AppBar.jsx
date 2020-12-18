@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderTopEndRadius: 15,
     borderTopStartRadius: 15,
-    height: '7%',
+    height: '8%',
   },
 });
 
@@ -18,7 +18,7 @@ const AppBar = () => {
         <Text
           style={{
             fontSize: 20,
-            marginTop: '3%',
+            marginTop: '7%',
             marginLeft: '2%',
             opacity: 0.6,
           }}
