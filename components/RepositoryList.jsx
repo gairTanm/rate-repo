@@ -62,6 +62,7 @@ const RepositoryList = () => {
     <FlatList
       data={repositories}
       ItemSeparatorComponent={ItemSeparator}
+      contentContainerStyle={{ justifyContent: 'space-around' }}
       renderItem={({ item }) => <RepositoryItem item={item} />}
     />
   );
