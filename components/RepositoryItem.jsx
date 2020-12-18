@@ -77,6 +77,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F1E9DB',
     borderRadius: 15,
     width: Dimensions.get('screen').width,
+    shadowColor: 'black',
+    shadowOpacity: 0.6,
   },
   primary: {
     height: 250,
