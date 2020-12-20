@@ -13,9 +13,9 @@ import { Link } from 'react-router-native';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ef8354',
-    paddingTop: Constants.statusBarHeight,
+    paddingTop: Constants.statusBarHeight + 8,
     width: '100%',
-    height: '9%',
+    height: '10%',
   },
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
 import { Route, Switch, Redirect } from 'react-router-native';
@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
 const Main = () => {
   return (
     <View style={styles.container}>
+      <StatusBar translucent backgroundColor="#ED723D" />
       <AppBar />
       <Switch>
         <Route path="/" exact>
