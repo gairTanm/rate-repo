@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   language: {
-    backgroundColor: '#716A5C',
+    backgroundColor: '#90BEDE',
     width: 100,
     marginTop: 10,
     borderRadius: 5,
