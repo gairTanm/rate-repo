@@ -60,6 +60,7 @@ const ItemSeparator = () => <View style={styles.separator} />;
 const RepositoryList = () => {
   return (
     <FlatList
+      showsVerticalScrollIndicator={false}
       data={repositories}
       ItemSeparatorComponent={ItemSeparator}
       contentContainerStyle={{ justifyContent: 'space-around' }}

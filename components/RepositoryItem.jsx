@@ -73,13 +73,14 @@ const styles = StyleSheet.create({
   touchable: {
     backgroundColor: '#F1E9DB',
     borderRadius: 15,
-    width: Dimensions.get('screen').width,
     shadowColor: 'black',
     shadowOpacity: 0.6,
     elevation: 10,
   },
   primary: {
     height: 250,
+    width: Dimensions.get('screen').width,
+    margin: 5,
   },
   image: {
     margin: 15,
@@ -89,6 +90,7 @@ const styles = StyleSheet.create({
   },
   info: {
     flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   language: {
     backgroundColor: '#90BEDE',
