@@ -72,15 +72,16 @@ const RepositoryItem = ({ item }) => {
 const styles = StyleSheet.create({
   touchable: {
     backgroundColor: '#F1E9DB',
-    borderRadius: 15,
+    borderRadius: 10,
     shadowColor: 'black',
     shadowOpacity: 0.6,
     elevation: 10,
+    padding: 5,
   },
   primary: {
     height: 250,
     width: Dimensions.get('screen').width,
-    margin: 5,
+    padding: 5,
   },
   image: {
     margin: 15,
