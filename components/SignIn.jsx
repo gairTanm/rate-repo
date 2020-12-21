@@ -32,6 +32,7 @@ const SignInForm = ({ onSubmit, errors }) => {
         <Text style={styles.errorText}>{errors.username}</Text>
       ) : null}
       <TextInput
+        secureTextEntry={true}
         label="Password"
         mode="outlined"
         placeholder="Password"
@@ -88,10 +89,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 50,
     borderColor: '#90BEDE',
+    opacity: 0.7,
   },
   error: {
     backgroundColor: '#F1E9DB',
     margin: 10,
+    opacity: 0.7,
     borderBottomWidth: 3,
     borderRadius: 10,
     height: 50,
