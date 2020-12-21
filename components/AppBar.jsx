@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ef8354',
     paddingTop: Constants.statusBarHeight + 8,
+    borderBottomWidth: 5,
+    borderBottomColor: '#90BEDE',
+    elevation: 20,
     width: '100%',
     height: 100,
   },
