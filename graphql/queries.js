@@ -7,6 +7,7 @@ export const FETCH_REPOS = gql`
         node {
           ownerName
           fullName
+          id
           ratingAverage
           reviewCount
           stargazersCount

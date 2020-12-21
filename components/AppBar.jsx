@@ -15,14 +15,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#ef8354',
     paddingTop: Constants.statusBarHeight + 8,
     width: '100%',
-    height: '10%',
+    height: 100,
   },
 });
 
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ paddingTop: 7 }}
+      >
         <View style={{ width: 150 }}>
           <Link
             to="/"

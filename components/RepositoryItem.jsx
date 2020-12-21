@@ -13,7 +13,14 @@ const RepositoryItem = ({ item }) => {
             style={styles.image}
           />
           <View style={{ flexWrap: 'wrap', margin: 10 }}>
-            <Text style={{ fontSize: 20, margin: 2 }} color="textPrimary">
+            <Text
+              style={{
+                fontSize: 20,
+                margin: 2,
+                width: Dimensions.get('screen').width - 160,
+              }}
+              color="textPrimary"
+            >
               {item.fullName}
             </Text>
             <Text
@@ -77,11 +84,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.6,
     elevation: 10,
     padding: 5,
+    height: 'auto',
   },
   primary: {
-    height: 250,
-    width: Dimensions.get('screen').width,
+    height: 'auto',
     padding: 5,
+    width: 'auto',
   },
   image: {
     margin: 15,
