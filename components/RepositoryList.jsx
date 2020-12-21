@@ -63,19 +63,21 @@ const RepositoryList = () => {
   const { data, error, loading } = useQuery(FETCH_REPOS, {
     fetchPolicy: 'cache-and-network',
   });
-  {
-    loading ? (
-      <Text>Loading</Text>
-    ) : (
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={data.repositories.edges}
-        ItemSeparatorComponent={ItemSeparator}
-        contentContainerStyle={{ justifyContent: 'space-around' }}
-        renderItem={({ item }) => <RepositoryItem item={item} />}
-      />
-    );
-  }
+  return (
+    <View style={{ flex: 1 }}>
+      {loading ? (
+        <Text>Loading</Text>
+      ) : (
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={data.repositories.edges}
+          ItemSeparatorComponent={ItemSeparator}
+          contentContainerStyle={{ justifyContent: 'space-around' }}
+          renderItem={({ item }) => <RepositoryItem item={item.node} />}
+        />
+      )}
+    </View>
+  );
 };
 
 export default RepositoryList;
