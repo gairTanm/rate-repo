@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  StatusBar,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import AppBar from './AppBar';
 import RepositoryList from './RepositoryList';
 import { Route, Switch, Redirect } from 'react-router-native';

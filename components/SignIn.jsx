@@ -1,11 +1,5 @@
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  KeyboardAvoidingView,
-  Text,
-} from 'react-native';
+import React from 'react';
+import { StyleSheet, View, TextInput, Text } from 'react-native';
 import { Formik, useField } from 'formik';
 import { Button } from 'react-native-paper';
 import * as yup from 'yup';
@@ -21,7 +15,8 @@ const initialValues = {
 };
 
 const SignInForm = ({ onSubmit, errors }) => {
-  const [usernameField, usernameMeta, usernameHelpers] = useField('username');
+  //eslint-disable-next-line
+  const [usernameField, usernameMeta, usernameHelpers] = useField('username'); //eslint-disable-next-line
   const [passwordField, passwordMeta, passwordHelpers] = useField('password');
   return (
     <View style={styles.form}>
