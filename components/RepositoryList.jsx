@@ -1,5 +1,7 @@
+import { useQuery } from '@apollo/react-hooks';
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, Text } from 'react-native';
+import { FETCH_REPOS } from '../graphql/queries';
 import RepositoryItem from './RepositoryItem';
 
 const styles = StyleSheet.create({
@@ -58,15 +60,22 @@ const repositories = [
 const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryList = () => {
-  return (
-    <FlatList
-      showsVerticalScrollIndicator={false}
-      data={repositories}
-      ItemSeparatorComponent={ItemSeparator}
-      contentContainerStyle={{ justifyContent: 'space-around' }}
-      renderItem={({ item }) => <RepositoryItem item={item} />}
-    />
-  );
+  const { data, error, loading } = useQuery(FETCH_REPOS, {
+    fetchPolicy: 'cache-and-network',
+  });
+  {
+    loading ? (
+      <Text>Loading</Text>
+    ) : (
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={data.repositories.edges}
+        ItemSeparatorComponent={ItemSeparator}
+        contentContainerStyle={{ justifyContent: 'space-around' }}
+        renderItem={({ item }) => <RepositoryItem item={item} />}
+      />
+    );
+  }
 };
 
 export default RepositoryList;
