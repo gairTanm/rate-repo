@@ -22,6 +22,7 @@ const Main = () => {
   const { data, error, loading } = useQuery(FETCH_REPOS, {
     fetchPolicy: 'cache-and-network',
   });
+
   return (
     <View style={{ flex: 1 }}>
       {!loading ? (
