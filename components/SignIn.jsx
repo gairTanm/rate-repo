@@ -4,6 +4,7 @@ import { Formik, useField } from 'formik';
 import { Button } from 'react-native-paper';
 import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
+import AuthStorage from '../utils/authStorage';
 
 const validationSchema = yup.object().shape({
   username: yup.string().required('Username is required'),
@@ -56,13 +57,13 @@ const SignInForm = ({ onSubmit, errors }) => {
 };
 
 const SignIn = () => {
-  const [signIn, result] = useSignIn();
+  const [signIn] = useSignIn();
   const onSubmit = async values => {
     const { username, password } = values;
-    console.log(values);
-    console.log({ username, password });
     try {
       const { data } = await signIn({ username, password });
+      const authStorage = new AuthStorage();
+      await authStorage.setAccessToken(data.authorize.accessToken);
       console.log(data);
     } catch (e) {
       console.log(e);
