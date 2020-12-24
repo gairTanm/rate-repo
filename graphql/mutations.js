@@ -15,11 +15,6 @@ export const CREATE_USER = gql`
 `;
 
 export const SIGN_IN = gql`
-  type AuthorizeInput {
-    username: String!
-    password: String!
-  }
-
   mutation authorize($credentials: AuthorizeInput!) {
     authorize(credentials: $credentials) {
       accessToken

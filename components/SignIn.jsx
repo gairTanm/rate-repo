@@ -59,12 +59,10 @@ const SignInForm = ({ onSubmit, errors }) => {
 const SignIn = () => {
   const [signIn] = useSignIn();
   const history = useHistory();
-
   const onSubmit = async values => {
     const { username, password } = values;
     try {
-      const { data } = await signIn({ username, password });
-      console.log(data);
+      await signIn({ username, password });
       history.push('/');
     } catch (e) {
       console.log(e);
@@ -78,9 +76,9 @@ const SignIn = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
       >
-        {({ handleSubmit, errors }) => {
-          return <SignInForm onSubmit={handleSubmit} errors={errors} />;
-        }}
+        {({ handleSubmit, errors }) => (
+          <SignInForm onSubmit={handleSubmit} errors={errors} />
+        )}
       </Formik>
     </View>
   );

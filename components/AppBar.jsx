@@ -31,7 +31,8 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
-  const data = useQuery(AUTHORIZED_USER);
+  const { data } = useQuery(AUTHORIZED_USER);
+  console.log(data);
   const apolloClient = useApolloClient();
   const authStorage = useContext(AuthStorageContext);
   const signOut = async () => {
@@ -58,7 +59,7 @@ const AppBar = () => {
           </Link>
         </View>
         <View style={{ width: 90 }}>
-          {!data.authorizedUser ? (
+          {!data?.authorizedUser ? (
             <Link
               to="/signin"
               style={{
