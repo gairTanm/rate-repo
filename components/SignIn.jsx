@@ -70,6 +70,7 @@ const SignIn = () => {
       console.log(e);
     }
   };
+
   return (
     <View style={{ width: '100%', backgroundColor: '', flex: 1, padding: 5 }}>
       <Formik
@@ -77,8 +78,8 @@ const SignIn = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
       >
-        {({ onSubmit, errors }) => {
-          return <SignInForm onSubmit={onSubmit} errors={errors} />;
+        {({ handleSubmit, errors }) => {
+          return <SignInForm onSubmit={handleSubmit} errors={errors} />;
         }}
       </Formik>
     </View>

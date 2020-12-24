@@ -30,7 +30,16 @@ const RepositoryList = () => {
         </View>
       ) : (
         <View>
-          <Text>Loading</Text>
+          <Text
+            style={{
+              fontSize: 20,
+              paddingTop: '70%',
+              justifyContent: 'space-around',
+              flexDirection: 'column',
+            }}
+          >
+            Loading...
+          </Text>
         </View>
       )}
     </View>
