@@ -20,3 +20,12 @@ export const FETCH_REPOS = gql`
     }
   }
 `;
+
+export const AUTHORIZED_USER = gql`
+  query {
+    authorizedUser {
+      id
+      username
+    }
+  }
+`;

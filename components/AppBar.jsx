@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,9 @@ import {
 
 import Constants from 'expo-constants';
 import { Link } from 'react-router-native';
+import { useApolloClient, useQuery } from '@apollo/client';
+import { AUTHORIZED_USER } from '../graphql/queries';
+import AuthStorageContext from '../contexts/AuthStorageContext';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,9 +23,21 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 100,
   },
+  text: {
+    fontSize: 20,
+    marginLeft: '2%',
+    opacity: 0.6,
+  },
 });
 
 const AppBar = () => {
+  const data = useQuery(AUTHORIZED_USER);
+  const apolloClient = useApolloClient();
+  const authStorage = useContext(AuthStorageContext);
+  const signOut = async () => {
+    await authStorage.removeAccessToken();
+    await apolloClient.resetStore();
+  };
   return (
     <View style={styles.container}>
       <ScrollView
@@ -39,37 +54,26 @@ const AppBar = () => {
             component={TouchableOpacity}
             activeOpacity={0.7}
           >
-            <Text
-              style={{
-                fontSize: 20,
-                marginLeft: '2%',
-                opacity: 0.6,
-              }}
-            >
-              Repositories
-            </Text>
+            <Text style={styles.text}>Repositories</Text>
           </Link>
         </View>
         <View style={{ width: 90 }}>
-          <Link
-            to="/signin"
-            style={{
-              marginLeft: '2%',
-            }}
-            component={TouchableOpacity}
-            activeOpacity={0.7}
-          >
-            <Text
+          {!data.authorizedUser ? (
+            <Link
+              to="/signin"
               style={{
-                fontSize: 20,
-
                 marginLeft: '2%',
-                opacity: 0.6,
               }}
+              component={TouchableOpacity}
+              activeOpacity={0.7}
             >
-              SignIn
+              <Text style={styles.text}>SignIn</Text>
+            </Link>
+          ) : (
+            <Text style={styles.text} onPress={signOut}>
+              SignOut
             </Text>
-          </Link>
+          )}
         </View>
       </ScrollView>
     </View>
