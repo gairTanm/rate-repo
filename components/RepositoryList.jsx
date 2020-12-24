@@ -1,5 +1,6 @@
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, Text } from 'react-native';
+import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 
 const styles = StyleSheet.create({
@@ -10,16 +11,28 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryList = ({ data }) => {
+const RepositoryList = () => {
+  const { repositories, loading } = useRepositories();
+  const repositoryNodes = repositories
+    ? repositories.edges.map(edge => edge.node)
+    : [];
   return (
     <View style={{ flex: 1 }}>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={data.repositories.edges}
-        ItemSeparatorComponent={ItemSeparator}
-        contentContainerStyle={{ justifyContent: 'space-around' }}
-        renderItem={({ item }) => <RepositoryItem item={item.node} />}
-      />
+      {!loading ? (
+        <View style={{ flex: 1 }}>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={repositoryNodes}
+            ItemSeparatorComponent={ItemSeparator}
+            contentContainerStyle={{ justifyContent: 'space-around' }}
+            renderItem={({ item }) => <RepositoryItem item={item} />}
+          />
+        </View>
+      ) : (
+        <View>
+          <Text>Loading</Text>
+        </View>
+      )}
     </View>
   );
 };

@@ -4,6 +4,7 @@ import { Formik, useField } from 'formik';
 import { Button } from 'react-native-paper';
 import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
+import { useHistory } from 'react-router-native';
 
 const validationSchema = yup.object().shape({
   username: yup.string().required('Username is required'),
@@ -57,10 +58,14 @@ const SignInForm = ({ onSubmit, errors }) => {
 
 const SignIn = () => {
   const [signIn] = useSignIn();
+  const history = useHistory();
+
   const onSubmit = async values => {
     const { username, password } = values;
     try {
       const { data } = await signIn({ username, password });
+      console.log(data);
+      history.push('/');
     } catch (e) {
       console.log(e);
     }
@@ -72,8 +77,8 @@ const SignIn = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
       >
-        {({ handleSubmit, errors }) => {
-          return <SignInForm onSubmit={handleSubmit} errors={errors} />;
+        {({ onSubmit, errors }) => {
+          return <SignInForm onSubmit={onSubmit} errors={errors} />;
         }}
       </Formik>
     </View>

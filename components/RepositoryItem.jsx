@@ -80,10 +80,11 @@ const styles = StyleSheet.create({
   touchable: {
     backgroundColor: '#F1E9DB',
     borderRadius: 10,
-    shadowColor: 'black',
     shadowOpacity: 0.6,
     elevation: 10,
     padding: 5,
+    borderWidth: 5,
+    borderColor: '#90BEDE',
     height: 'auto',
   },
   primary: {
