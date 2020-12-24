@@ -1,6 +1,13 @@
 import React from 'react';
-import { TouchableHighlight, View, StyleSheet, Image } from 'react-native';
+import {
+  TouchableHighlight,
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import { Dimensions } from 'react-native';
+import { Link } from 'react-router-native';
 import Text from './Text';
 
 const RepositoryItem = ({ item }) => {
@@ -13,16 +20,18 @@ const RepositoryItem = ({ item }) => {
             style={styles.image}
           />
           <View style={{ flexWrap: 'wrap', margin: 10 }}>
-            <Text
-              style={{
-                fontSize: 20,
-                margin: 2,
-                width: Dimensions.get('screen').width - 160,
-              }}
-              color="textPrimary"
-            >
-              {item.fullName}
-            </Text>
+            <Link to="/repo/jaredpalmer.formik" component={TouchableOpacity}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  margin: 2,
+                  width: Dimensions.get('screen').width - 160,
+                }}
+                color="textPrimary"
+              >
+                {item.fullName}
+              </Text>
+            </Link>
             <Text
               style={{
                 marginTop: 10,

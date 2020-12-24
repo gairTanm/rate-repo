@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
 
 const AppBar = () => {
   const { data } = useQuery(AUTHORIZED_USER);
-  console.log(data);
   const apolloClient = useApolloClient();
   const authStorage = useContext(AuthStorageContext);
   const signOut = async () => {
