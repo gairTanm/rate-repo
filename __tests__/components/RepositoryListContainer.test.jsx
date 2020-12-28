@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { render } from '@testing-library/react-native';
-import RepositoryItem from '../components/RepositoryItem';
+import { RepositoryListContainer } from '../../components/RepositoryList.jsx';
 
 describe('RepositoryList', () => {
   describe('RepositoryListContainer', () => {
@@ -48,11 +48,16 @@ describe('RepositoryList', () => {
           },
         ],
       };
-      const { debug, getTestById } = render(
-        <RepositoryList repositories={repositories} />
+      const { debug, getAllByTestId } = render(
+        <RepositoryListContainer repositories={repositories} />
       );
       debug();
-      expect(getAllByTestId('fullName')).toHaveContext('jaredpalmer/formik');
+      expect(getAllByTestId('fullName')[0]).toHaveTextContent(
+        'jaredpalmer/formik'
+      );
+      expect(getAllByTestId('fullName')[1]).toHaveTextContent(
+        'async-library/react-async'
+      );
       // Add your test code here
     });
   });
