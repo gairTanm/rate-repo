@@ -11,23 +11,30 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryList = () => {
-  const { repositories, loading } = useRepositories();
+const RepositoryListContainer = ({ repositories }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
   return (
     <View style={{ flex: 1 }}>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={repositoryNodes}
+        ItemSeparatorComponent={ItemSeparator}
+        contentContainerStyle={{ justifyContent: 'space-around' }}
+        renderItem={({ item }) => <RepositoryItem item={item} />}
+      />
+    </View>
+  );
+};
+
+const RepositoryList = () => {
+  const { repositories, loading } = useRepositories();
+
+  return (
+    <View style={{ flex: 1 }}>
       {!loading ? (
-        <View style={{ flex: 1 }}>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={repositoryNodes}
-            ItemSeparatorComponent={ItemSeparator}
-            contentContainerStyle={{ justifyContent: 'space-around' }}
-            renderItem={({ item }) => <RepositoryItem item={item} />}
-          />
-        </View>
+        <RepositoryListContainer repositories={repositories} />
       ) : (
         <View>
           <Text

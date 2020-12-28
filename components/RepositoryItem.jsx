@@ -28,6 +28,7 @@ const RepositoryItem = ({ item }) => {
                   width: Dimensions.get('screen').width - 160,
                 }}
                 color="textPrimary"
+                testID="fullName"
               >
                 {item.fullName}
               </Text>
