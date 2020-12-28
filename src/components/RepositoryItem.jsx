@@ -20,7 +20,7 @@ const RepositoryItem = ({ item }) => {
             style={styles.image}
           />
           <View style={{ flexWrap: 'wrap', margin: 10 }}>
-            <Link to="/repo/jaredpalmer.formik" component={TouchableOpacity}>
+            <Link to={`/repo/${item.id}`} component={TouchableOpacity}>
               <Text
                 style={{
                   fontSize: 20,

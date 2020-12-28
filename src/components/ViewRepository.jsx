@@ -6,7 +6,6 @@ import useRepository from '../hooks/useRepository';
 
 const ViewRepository = () => {
   let { id } = useParams();
-  console.log(id);
   const { repository, loading } = useRepository({ id });
   return (
     <View style={{ flex: 1 }}>
