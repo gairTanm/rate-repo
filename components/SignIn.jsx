@@ -16,7 +16,7 @@ const initialValues = {
   password: '',
 };
 
-const SignInForm = ({ onSubmit, errors }) => {
+export const SignInForm = ({ onSubmit, errors }) => {
   //eslint-disable-next-line
   const [usernameField, usernameMeta, usernameHelpers] = useField('username'); //eslint-disable-next-line
   const [passwordField, passwordMeta, passwordHelpers] = useField('password');
@@ -24,6 +24,7 @@ const SignInForm = ({ onSubmit, errors }) => {
     <View style={styles.form}>
       <TextInput
         label="Username"
+        testID="username"
         mode="outlined"
         style={errors.username ? styles.error : styles.input}
         value={usernameField.value}
@@ -38,6 +39,7 @@ const SignInForm = ({ onSubmit, errors }) => {
         label="Password"
         mode="outlined"
         placeholder="Password"
+        testID="password"
         value={passwordField.value}
         onChangeText={text => passwordHelpers.setValue(text)}
         style={errors.password ? styles.error : styles.input}
@@ -47,6 +49,7 @@ const SignInForm = ({ onSubmit, errors }) => {
       ) : null}
       <Button
         mode="contained"
+        testID="button"
         style={{ backgroundColor: '#90BEDE', margin: 10 }}
         onPress={onSubmit}
       >

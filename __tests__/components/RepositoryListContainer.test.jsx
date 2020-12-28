@@ -51,7 +51,6 @@ describe('RepositoryList', () => {
       const { debug, getAllByTestId } = render(
         <RepositoryListContainer repositories={repositories} />
       );
-      debug();
       expect(getAllByTestId('fullName')[0]).toHaveTextContent(
         'jaredpalmer/formik'
       );
