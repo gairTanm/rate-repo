@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
   rating: {
     color: '#90BEDE',
     alignSelf: 'center',
-    marginTop: 10,
+    fontWeight: 'bold',
+    marginTop: 11,
     fontSize: 15,
   },
   username: {

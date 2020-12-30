@@ -57,6 +57,18 @@ const AppBar = () => {
             <Text style={styles.text}>Repositories</Text>
           </Link>
         </View>
+        <View style={{ width: 100 }}>
+          <Link
+            to="/review"
+            style={{
+              marginLeft: '2%',
+            }}
+            component={TouchableOpacity}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.text}>Review</Text>
+          </Link>
+        </View>
         <View style={{ width: 90 }}>
           {!data?.authorizedUser ? (
             <Link
