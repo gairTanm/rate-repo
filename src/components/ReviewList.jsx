@@ -22,7 +22,6 @@ const ItemSeparator = () => <View style={styles.separator} />;
 const ReviewList = ({ id }) => {
   const { reviews, loading } = useReviews({ id });
   const reviewsNodes = reviews ? reviews.edges.map(edge => edge.node) : [];
-  console.log(reviewsNodes);
   return (
     <View style={{ flex: 1, width: Dimensions.get('screen').width }}>
       {!loading ? (
