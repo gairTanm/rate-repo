@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, Text } from 'react-native';
 import { Formik, useField } from 'formik';
-import { Button } from 'react-native-paper';
+import { Button, Dialog, Paragraph, Portal } from 'react-native-paper';
 import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
 import { useHistory } from 'react-router-native';
@@ -61,6 +61,7 @@ export const SignInForm = ({ onSubmit, errors }) => {
 
 const SignIn = () => {
   const [signIn] = useSignIn();
+  const [visible, setVisible] = useState(false);
   const history = useHistory();
   const onSubmit = async values => {
     const { username, password } = values;
@@ -68,12 +69,25 @@ const SignIn = () => {
       await signIn({ username, password });
       history.push('/');
     } catch (e) {
-      console.log(e);
+      setVisible(true);
     }
   };
 
   return (
     <View style={{ width: '100%', backgroundColor: '', flex: 1, padding: 5 }}>
+      <Portal>
+        <Dialog visible={visible}>
+          <Dialog.Title>Wrong Credentials</Dialog.Title>
+          <Dialog.Content>
+            <Paragraph>
+              Please check the username or password and try again
+            </Paragraph>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={() => setVisible(false)}>Okay</Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
       <Formik
         onSubmit={onSubmit}
         initialValues={initialValues}

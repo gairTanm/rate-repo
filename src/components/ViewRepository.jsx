@@ -26,13 +26,37 @@ const ViewRepository = () => {
           <Card.Cover
             source={{ uri: repository.ownerAvatarUrl }}
             resizeMode="stretch"
-            style={{ height: 300, margin: 10 }}
+            style={{
+              height: 300,
+              margin: 10,
+              borderRadius: 30,
+              borderTopEndRadius: 30,
+              borderTopLeftRadius: 30,
+            }}
           />
-          <Card.Content style={{ alignItems: 'center', margin: 20 }}>
-            <Card.Title title={repository.fullName} />
-            <Paragraph>{repository.description}</Paragraph>
+          <Card.Content
+            style={{
+              alignSelf: 'center',
+              width: Dimensions.get('screen').width - 20,
+            }}
+          >
+            <View style={styles.title}>
+              <Text
+                style={{
+                  fontSize: 25,
+                  opacity: 0.7,
+                }}
+              >
+                {repository.fullName}
+              </Text>
+            </View>
+            <Paragraph style={styles.paragraph}>
+              {repository.description}
+            </Paragraph>
             <View style={styles.language}>
-              <Text style={{ alignSelf: 'center' }}>{repository.language}</Text>
+              <Text style={{ alignSelf: 'center', color: '#F1E9DB' }}>
+                {repository.language}
+              </Text>
             </View>
             <View style={styles.info}>
               <View style={styles.stats}>
@@ -87,11 +111,14 @@ const styles = StyleSheet.create({
   card: {
     width: Dimensions.get('screen').width - 20,
     margin: 20,
-    flex: 1,
+    padding: 10,
     borderWidth: 5,
     borderColor: '#90BEDE',
     backgroundColor: '#F1E9DB',
     elevation: 10,
+  },
+  title: {
+    alignSelf: 'center',
   },
   button: {
     flex: 1,
@@ -99,11 +126,17 @@ const styles = StyleSheet.create({
     height: '100%',
     margin: 10,
   },
+  paragraph: {
+    alignSelf: 'center',
+    fontSize: 20,
+    opacity: 0.7,
+    marginTop: 20,
+  },
   language: {
     backgroundColor: '#90BEDE',
     width: 100,
     alignSelf: 'center',
-    margin: 10,
+    marginTop: 10,
     borderRadius: 5,
     opacity: 0.9,
     height: 25,
