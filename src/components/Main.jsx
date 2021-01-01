@@ -6,6 +6,7 @@ import { Route, Switch, Redirect } from 'react-router-native';
 import SignIn from './SignIn';
 import ViewRepository from './ViewRepository';
 import ReviewForm from './ReviewForm';
+import SignUp from './SignUp';
 
 const styles = StyleSheet.create({
   container: {
@@ -33,6 +34,9 @@ const Main = () => {
           </Route>
           <Route path="/review">
             <ReviewForm />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
           </Route>
           <Route path="/repo/:id">
             <ViewRepository />

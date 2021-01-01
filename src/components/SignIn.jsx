@@ -74,7 +74,7 @@ const SignIn = () => {
   };
 
   return (
-    <View style={{ width: '100%', backgroundColor: '', flex: 1, padding: 5 }}>
+    <View style={{ width: '100%', flex: 1, padding: 5 }}>
       <Portal>
         <Dialog visible={visible}>
           <Dialog.Title>Wrong Credentials</Dialog.Title>
