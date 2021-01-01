@@ -57,7 +57,7 @@ const AppBar = () => {
             <Text style={styles.text}>Repositories</Text>
           </Link>
         </View>
-        <View style={{ width: 100 }}>
+        <View style={{ width: 180 }}>
           <Link
             to="/review"
             style={{
@@ -66,7 +66,7 @@ const AppBar = () => {
             component={TouchableOpacity}
             activeOpacity={0.7}
           >
-            <Text style={styles.text}>Review</Text>
+            <Text style={styles.text}>Create a Review</Text>
           </Link>
         </View>
 

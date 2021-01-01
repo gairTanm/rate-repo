@@ -3,8 +3,7 @@ import { Formik, useField } from 'formik';
 import { StyleSheet, TextInput, View, Text } from 'react-native';
 import * as yup from 'yup';
 import { Button, Dialog, Paragraph, Portal } from 'react-native-paper';
-import useSignUp from '../hooks/useSignUp';
-import useSignIn from '../hooks/useSignIn';
+import useReview from '../hooks/useReview';
 import { useHistory } from 'react-router-native';
 
 const validationSchema = yup.object().shape({
@@ -17,7 +16,7 @@ const validationSchema = yup.object().shape({
 const initialValues = {
   ownerName: '',
   repositoryName: '',
-  rating: null,
+  rating: '',
   review: '',
 };
 
@@ -71,6 +70,9 @@ const SignUpForm = ({ onSubmit, errors }) => {
 
       <TextInput
         multiline
+        value={reviewField.value}
+        placeholder="Review"
+        onChangeText={text => reviewHelpers.setValue(text)}
         style={showReviewError ? styles.error : styles.input}
       />
       {showReviewError ? (
@@ -82,30 +84,38 @@ const SignUpForm = ({ onSubmit, errors }) => {
         style={{ backgroundColor: '#90BEDE', margin: 10 }}
         onPress={onSubmit}
       >
-        Submit (Hope that they'll like it)
+        Submit (Hope they'll like it)
       </Button>
     </View>
   );
 };
 
 const ReviewForm = () => {
-  const [signUp] = useSignUp();
-  const [signIn] = useSignIn();
-  const history = useHistory();
+  const [review] = useReview();
   const [visible, setVisible] = useState(false);
+  const history = useHistory();
   const onSubmit = async values => {
-    const { username, password } = values;
-    console.log({ username, password });
+    try {
+      await review({
+        ...values,
+        text: values.review,
+        rating: parseInt(values.rating),
+      });
+      history.push('/');
+    } catch (e) {
+      setVisible(true);
+    }
   };
 
   return (
     <View style={{ flex: 1, width: '100%', padding: 5 }}>
       <Portal>
         <Dialog visible={visible}>
-          <Dialog.Title>Username Already Taken!</Dialog.Title>
+          <Dialog.Title>Oh hey...a wild error just appeared!</Dialog.Title>
           <Dialog.Content>
             <Text>
-              Umm... the username's already taken, try using another one.
+              Sorry...either that repository does not exist or you have already
+              reviewed it. Please recheck the name just in case...
             </Text>
           </Dialog.Content>
           <Dialog.Actions>
