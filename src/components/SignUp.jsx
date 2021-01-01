@@ -4,6 +4,9 @@ import { StyleSheet, TextInput, View, Text } from 'react-native';
 import * as yup from 'yup';
 import { setLocale } from 'yup';
 import { Button } from 'react-native-paper';
+import useSignUp from '../hooks/useSignUp';
+import useSignIn from '../hooks/useSignIn';
+import { useHistory } from 'react-router-native';
 
 const validationSchema = yup.object().shape({
   username: yup.string().required('Username is required').min(3).max(30),
@@ -28,15 +31,19 @@ const SignUpForm = ({ onSubmit, errors }) => {
     confirmPasswordMeta,
     confirmPasswordHelpers,
   ] = useField('confirmPassword');
+  const showUsernameError = usernameMeta.touched && usernameMeta.error;
+  const showPasswordError = passwordMeta.touched && passwordMeta.error;
+  const showConfirmPasswordError =
+    confirmPasswordMeta.touched && confirmPasswordMeta.error;
   return (
     <View style={styles.form}>
       <TextInput
         placeholder="Username"
         value={usernameField.value}
-        style={errors.username ? styles.error : styles.input}
+        style={showUsernameError ? styles.error : styles.input}
         onChangeText={text => usernameHelpers.setValue(text)}
       />
-      {errors.username ? (
+      {showUsernameError ? (
         <Text style={styles.errorText}>
           Username length should be atleast 3 and less than 30!{' '}
         </Text>
@@ -44,10 +51,10 @@ const SignUpForm = ({ onSubmit, errors }) => {
       <TextInput
         placeholder="Password"
         value={passwordField.value}
-        style={errors.password ? styles.error : styles.input}
+        style={showPasswordError ? styles.error : styles.input}
         onChangeText={text => passwordHelpers.setValue(text)}
       />
-      {errors.password ? (
+      {showPasswordError ? (
         <Text style={styles.errorText}>
           Password length should be atleast 5 and less than 50!
         </Text>
@@ -55,10 +62,10 @@ const SignUpForm = ({ onSubmit, errors }) => {
       <TextInput
         placeholder="Confirm Password"
         value={confirmPasswordField.value}
-        style={errors.confirmPassword ? styles.error : styles.input}
+        style={showConfirmPasswordError ? styles.error : styles.input}
         onChangeText={text => confirmPasswordHelpers.setValue(text)}
       />
-      {errors.confirmPassword ? (
+      {showConfirmPasswordError ? (
         <Text style={styles.errorText}>
           Umm... this should be the same as the password :)
         </Text>
@@ -77,9 +84,19 @@ const SignUpForm = ({ onSubmit, errors }) => {
 };
 
 const SignUp = () => {
+  const [signUp] = useSignUp();
+  const [signIn] = useSignIn();
+  const history = useHistory();
   const onSubmit = async values => {
     const { username, password } = values;
     console.log({ username, password });
+    try {
+      await signUp({ username, password });
+      await signIn({ username, password });
+      history.push('/');
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
