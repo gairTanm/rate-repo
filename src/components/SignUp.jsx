@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, useField } from 'formik';
 import { StyleSheet, TextInput, View, Text } from 'react-native';
 import * as yup from 'yup';
 import { setLocale } from 'yup';
-import { Button } from 'react-native-paper';
+import { Button, Dialog, Paragraph, Portal } from 'react-native-paper';
 import useSignUp from '../hooks/useSignUp';
 import useSignIn from '../hooks/useSignIn';
 import { useHistory } from 'react-router-native';
@@ -87,6 +87,7 @@ const SignUp = () => {
   const [signUp] = useSignUp();
   const [signIn] = useSignIn();
   const history = useHistory();
+  const [visible, setVisible] = useState(false);
   const onSubmit = async values => {
     const { username, password } = values;
     console.log({ username, password });
@@ -95,12 +96,31 @@ const SignUp = () => {
       await signIn({ username, password });
       history.push('/');
     } catch (e) {
-      console.log(e);
+      setVisible(true);
     }
   };
 
   return (
     <View style={{ flex: 1, width: '100%', padding: 5 }}>
+      <Portal>
+        <Dialog visible={visible}>
+          <Dialog.Title>Username Already Taken!</Dialog.Title>
+          <Dialog.Content>
+            <Text>
+              Umm... the username's already taken, try using another one.
+            </Text>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button
+              contained
+              style={styles.button}
+              onPress={() => setVisible(false)}
+            >
+              Umm...Okay
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
