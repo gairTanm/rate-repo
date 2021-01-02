@@ -47,7 +47,7 @@ const RepositoryList = () => {
   }, [debouncedSearchQuery]);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, width: '100%' }}>
       <View style={styles.searchContainer}>
         <SearchRepositories
           onChangeQuery={onChangeQuery}
