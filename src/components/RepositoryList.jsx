@@ -4,6 +4,7 @@ import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 import SearchRepositories from './SearchRepositories';
 import { useDebounce } from 'use-debounce';
+import Dropdown from './Dropdown';
 
 const styles = StyleSheet.create({
   separator: {
@@ -37,6 +38,7 @@ export const RepositoryListContainer = ({ repositories }) => {
 const RepositoryList = () => {
   const [variables, setVariables] = React.useState();
   const [searchQuery, setSearchQuery] = React.useState('');
+  const [sort, setSort] = React.useState();
   const [debouncedSearchQuery] = useDebounce(searchQuery, 500);
   const onChangeQuery = query => setSearchQuery(query);
 
@@ -46,6 +48,12 @@ const RepositoryList = () => {
     setVariables({ searchKeyword: debouncedSearchQuery });
   }, [debouncedSearchQuery]);
 
+  const onPress = ({ sortBy, variables }) => {
+    console.log({ sortBy, variables });
+    setSort(sortBy);
+    setVariables(variables);
+  };
+
   return (
     <View style={{ flex: 1, width: '100%' }}>
       <View style={styles.searchContainer}>
@@ -53,18 +61,18 @@ const RepositoryList = () => {
           onChangeQuery={onChangeQuery}
           searchQuery={searchQuery}
         />
+        <Dropdown sort={sort} onPress={onPress} />
       </View>
       {!loading ? (
-        <>
-          <RepositoryListContainer repositories={repositories} />
-        </>
+        <RepositoryListContainer repositories={repositories} />
       ) : (
         <View>
           <Text
             style={{
               fontSize: 20,
-              paddingTop: '70%',
+              opacity: 0.6,
               justifyContent: 'space-around',
+              alignSelf: 'center',
               flexDirection: 'column',
             }}
           >
