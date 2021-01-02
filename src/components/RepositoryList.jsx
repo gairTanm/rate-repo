@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FlatList, View, StyleSheet, Text } from 'react-native';
 import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
+import SearchRepositories from './SearchRepositories';
+import { useDebounce } from 'use-debounce';
 
 const styles = StyleSheet.create({
   separator: {
     height: 10,
+  },
+  searchContainer: {
+    padding: 10,
+    width: '100%',
   },
 });
 
@@ -29,12 +35,29 @@ export const RepositoryListContainer = ({ repositories }) => {
 };
 
 const RepositoryList = () => {
-  const { repositories, loading } = useRepositories();
+  const [variables, setVariables] = React.useState();
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [debouncedSearchQuery] = useDebounce(searchQuery, 500);
+  const onChangeQuery = query => setSearchQuery(query);
+
+  const { repositories, loading } = useRepositories({ ...variables });
+
+  useEffect(() => {
+    setVariables({ searchKeyword: debouncedSearchQuery });
+  }, [debouncedSearchQuery]);
 
   return (
     <View style={{ flex: 1 }}>
+      <View style={styles.searchContainer}>
+        <SearchRepositories
+          onChangeQuery={onChangeQuery}
+          searchQuery={searchQuery}
+        />
+      </View>
       {!loading ? (
-        <RepositoryListContainer repositories={repositories} />
+        <>
+          <RepositoryListContainer repositories={repositories} />
+        </>
       ) : (
         <View>
           <Text

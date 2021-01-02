@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { FETCH_REPOS } from '../graphql/queries';
 
-const useRepositories = ({ searchKeyword }) => {
+const useSearch = ({ searchKeyword }) => {
   const { data, loading } = useQuery(FETCH_REPOS, {
     fetchPolicy: 'cache-and-network',
     variables: { searchKeyword },
@@ -10,4 +10,4 @@ const useRepositories = ({ searchKeyword }) => {
   return { repositories, loading };
 };
 
-export default useRepositories;
+export default useSearch;
