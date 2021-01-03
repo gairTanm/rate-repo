@@ -48,8 +48,7 @@ const RepositoryList = () => {
     setVariables({ searchKeyword: debouncedSearchQuery });
   }, [debouncedSearchQuery]);
 
-  const onPress = ({ sortBy, variables }) => {
-    console.log({ sortBy, variables });
+  const onPress = (sortBy, variables) => {
     setSort(sortBy);
     setVariables(variables);
   };

@@ -11,11 +11,16 @@ import { AntDesign } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
   button: {
-    height: 30,
+    height: 40,
     justifyContent: 'center',
+    borderWidth: 2,
+    borderColor: 'white',
+    borderRadius: 20,
     alignSelf: 'center',
     margin: 10,
     width: Dimensions.get('screen').width,
+    borderColor: '#ef8354',
+    opacity: 0.5,
   },
   menu: {
     width: Dimensions.get('screen').width,
@@ -63,7 +68,7 @@ const Dropdown = ({ onPress, sort }) => {
               style={{
                 fontSize: 20,
                 alignSelf: 'center',
-                opacity: 0.5,
+                justifyContent: 'space-between',
               }}
             >
               {sort ? sort : 'Latest Repositories'}
@@ -78,11 +83,10 @@ const Dropdown = ({ onPress, sort }) => {
         }
       >
         <Menu.Item
-          onPress={e => {
-            const value =
-              e._dispatchInstances.memoizedProps.children[0].props.children[1]
-                .props.children.props.children;
-            onPress(getSortVariables(value), value);
+          onPress={() => {
+            const sortBy = 'Latest repositories';
+            const variables = getSortVariables(sortBy);
+            onPress(sortBy, variables);
             closeMenu();
           }}
           title="Latest repositories"
@@ -90,10 +94,9 @@ const Dropdown = ({ onPress, sort }) => {
         <Divider />
         <Menu.Item
           onPress={e => {
-            const value =
-              e._dispatchInstances.memoizedProps.children[0].props.children[1]
-                .props.children.props.children;
-            onPress(getSortVariables(value), value);
+            const sortBy = 'Highest rated repositories';
+            const variables = getSortVariables(sortBy);
+            onPress(sortBy, variables);
             closeMenu();
           }}
           title="Highest rated repositories"
@@ -101,11 +104,9 @@ const Dropdown = ({ onPress, sort }) => {
         <Divider />
         <Menu.Item
           onPress={e => {
-            console.log(e._dispatchInstances.memoizedProps.children);
-            const value =
-              e._dispatchInstances.memoizedProps.children[0].props.children[1]
-                .props.children.props.children;
-            onPress(getSortVariables(value), value);
+            const sortBy = 'Lowest rated repositories';
+            const variables = getSortVariables(sortBy);
+            onPress(sortBy, variables);
             closeMenu();
           }}
           title="Lowest rated repositories"
