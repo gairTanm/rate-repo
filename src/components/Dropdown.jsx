@@ -18,11 +18,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: '100%',
     borderColor: '#ef8354',
-    opacity: 0.5,
+    opacity: 0.6,
   },
   menu: {
     width: Dimensions.get('screen').width,
     alignItems: 'center',
+  },
+  menuItem: {
+    width: Dimensions.get('screen').width,
   },
 });
 
@@ -81,6 +84,7 @@ const Dropdown = ({ onPress, sort }) => {
         }
       >
         <Menu.Item
+          style={styles.menuItem}
           onPress={() => {
             const sortBy = 'Latest repositories';
             const variables = getSortVariables(sortBy);
@@ -91,6 +95,7 @@ const Dropdown = ({ onPress, sort }) => {
         />
         <Divider />
         <Menu.Item
+          style={styles.menuItem}
           onPress={e => {
             const sortBy = 'Highest rated repositories';
             const variables = getSortVariables(sortBy);
@@ -101,6 +106,7 @@ const Dropdown = ({ onPress, sort }) => {
         />
         <Divider />
         <Menu.Item
+          style={styles.menuItem}
           onPress={e => {
             const sortBy = 'Lowest rated repositories';
             const variables = getSortVariables(sortBy);

@@ -6,6 +6,11 @@ import useSearch from '../hooks/useSearch';
 const SearchRepositories = ({ searchQuery, onChangeQuery }) => {
   return (
     <Searchbar
+      style={{
+        backgroundColor: '#F1E9DB',
+        borderRadius: 30,
+        elevation: 10,
+      }}
       placeholder="Search Repositories"
       onChangeText={onChangeQuery}
       value={searchQuery}
