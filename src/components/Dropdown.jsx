@@ -14,15 +14,17 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     borderWidth: 2,
-    borderRadius: 20,
+    borderRadius: 10,
+    padding: 20,
     marginTop: 10,
     width: '100%',
     borderColor: '#ef8354',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
     opacity: 0.6,
   },
   menu: {
     width: Dimensions.get('screen').width,
-    alignItems: 'center',
   },
   menuItem: {
     width: Dimensions.get('screen').width,
@@ -73,13 +75,13 @@ const Dropdown = ({ onPress, sort }) => {
               }}
             >
               {sort ? sort : 'Latest Repositories'}
-              <AntDesign
-                style={{ alignSelf: 'center' }}
-                name="caretdown"
-                size={15}
-                color="#ef8354"
-              />
             </Text>
+            <AntDesign
+              style={{ alignSelf: 'center' }}
+              name="caretdown"
+              size={20}
+              color="#ef8354"
+            />
           </TouchableOpacity>
         }
       >
