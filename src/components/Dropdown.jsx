@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   menu: {
-    width: Dimensions.get('screen').width,
+    width: Dimensions.get('screen').width - 30,
   },
   menuItem: {
     width: Dimensions.get('screen').width,
