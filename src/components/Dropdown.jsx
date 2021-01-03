@@ -14,11 +14,9 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: 'center',
     borderWidth: 2,
-    borderColor: 'white',
     borderRadius: 20,
-    alignSelf: 'center',
-    margin: 10,
-    width: Dimensions.get('screen').width,
+    marginTop: 10,
+    width: '100%',
     borderColor: '#ef8354',
     opacity: 0.5,
   },
@@ -55,7 +53,8 @@ const Dropdown = ({ onPress, sort }) => {
   return (
     <View
       style={{
-        width: Dimensions.get('screen').width,
+        width: '100%',
+        flex: 1,
       }}
     >
       <Menu

@@ -1,8 +1,8 @@
 import { gql } from 'apollo-boost';
 
 export const FETCH_REPOS = gql`
-  query($searchKeyword: String!) {
-    repositories(searchKeyword: $searchKeyword) {
+  query($searchKeyword: String!, $after: String!, $first: Int!) {
+    repositories(searchKeyword: $searchKeyword, first: $first, after: $after) {
       edges {
         node {
           ownerName
@@ -16,6 +16,13 @@ export const FETCH_REPOS = gql`
           language
           description
         }
+        cursor
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        totalCount
+        hasNextPage
       }
     }
   }

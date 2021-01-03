@@ -18,20 +18,20 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, onEndReached }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
     : [];
   return (
-    <View style={{ flex: 1 }}>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={repositoryNodes}
-        ItemSeparatorComponent={ItemSeparator}
-        contentContainerStyle={{ justifyContent: 'space-around' }}
-        renderItem={({ item }) => <RepositoryItem item={item} />}
-      />
-    </View>
+    <FlatList
+      showsVerticalScrollIndicator={false}
+      data={repositoryNodes}
+      ItemSeparatorComponent={ItemSeparator}
+      contentContainerStyle={{ justifyContent: 'space-around' }}
+      renderItem={({ item }) => <RepositoryItem item={item} />}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0.5}
+    />
   );
 };
 
@@ -42,7 +42,14 @@ const RepositoryList = () => {
   const [debouncedSearchQuery] = useDebounce(searchQuery, 500);
   const onChangeQuery = query => setSearchQuery(query);
 
-  const { repositories, loading } = useRepositories({ ...variables });
+  const { repositories, loading, fetchMore } = useRepositories({
+    ...variables,
+    first: 5,
+  });
+
+  const onEndReached = () => {
+    fetchMore();
+  };
 
   useEffect(() => {
     setVariables({ searchKeyword: debouncedSearchQuery });
@@ -63,7 +70,10 @@ const RepositoryList = () => {
         <Dropdown sort={sort} onPress={onPress} />
       </View>
       {!loading ? (
-        <RepositoryListContainer repositories={repositories} />
+        <RepositoryListContainer
+          repositories={repositories}
+          onEndReached={onEndReached}
+        />
       ) : (
         <View>
           <Text
