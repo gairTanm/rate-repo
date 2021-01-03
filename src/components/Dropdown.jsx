@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Button, Menu, Divider, Provider } from 'react-native-paper';
+import { Menu, Divider } from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
@@ -54,7 +54,6 @@ const Dropdown = ({ onPress, sort }) => {
     <View
       style={{
         width: '100%',
-        flex: 1,
       }}
     >
       <Menu

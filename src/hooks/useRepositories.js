@@ -13,9 +13,8 @@ const useRepositories = variables => {
     if (!canFetchMore) {
       return;
     }
-
     fetchMore({
-      query: GET_REPOSITORIES,
+      query: FETCH_REPOS,
       variables: {
         after: data.repositories.pageInfo.endCursor,
         ...variables,

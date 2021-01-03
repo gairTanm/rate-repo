@@ -30,7 +30,7 @@ export const RepositoryListContainer = ({ repositories, onEndReached }) => {
       contentContainerStyle={{ justifyContent: 'space-around' }}
       renderItem={({ item }) => <RepositoryItem item={item} />}
       onEndReached={onEndReached}
-      onEndReachedThreshold={0.5}
+      onEndReachedThreshold={1}
     />
   );
 };
@@ -41,10 +41,10 @@ const RepositoryList = () => {
   const [sort, setSort] = React.useState();
   const [debouncedSearchQuery] = useDebounce(searchQuery, 500);
   const onChangeQuery = query => setSearchQuery(query);
-
-  const { repositories, loading, fetchMore } = useRepositories({
+  const loading = false;
+  const { repositories, fetchMore } = useRepositories({
     ...variables,
-    first: 5,
+    first: 3,
   });
 
   const onEndReached = () => {

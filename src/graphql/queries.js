@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 
 export const FETCH_REPOS = gql`
-  query($searchKeyword: String!, $after: String!, $first: Int!) {
+  query($searchKeyword: String, $first: Int!, $after: String) {
     repositories(searchKeyword: $searchKeyword, first: $first, after: $after) {
       edges {
         node {
